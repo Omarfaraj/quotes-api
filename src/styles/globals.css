@@ -105,3 +105,33 @@ a {
     color-scheme: dark;
   }
 }
+
+
+
+
+/*// export default async function fetchData(req: NextApiRequest, res: NextApiResponse) {
+//   const options = {
+//     method: 'GET',
+//     url: 'https://andruxnet-random-famous-quotes.p.rapidapi.com/',
+//     params: {
+//       count: '10',
+//       cat: 'famous'
+//     },
+//     headers: {
+//       'X-RapidAPI-Key': 'SIGN-UP-FOR-KEY',
+//       'X-RapidAPI-Host': 'andruxnet-random-famous-quotes.p.rapidapi.com'
+//     }
+//   };
+
+//   try {
+//     const response = await fetch(options.url, options);
+//     if (!response.ok) {
+//       throw new Error('Failed to fetch data');
+//     }
+//     const data = await response.json();
+//     res.status(200).json(data); // Send JSON response
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: 'Failed to fetch data' });
+//   }
+// }*/
