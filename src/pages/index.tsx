@@ -7,57 +7,54 @@ import axios from 'axios';
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
-   const [quotes, setQuotes] = useState([]);
 
-  const fetchQuotes = async () => {
+
+
+// import { useEffect, useState } from 'react';
+
+export default function TestApi() {
+  const [activity, setActivity] = useState(null);
+
+  async function fetchData() {
     try {
-      const response = await axios.get('/api/fetchData2');
-      setQuotes(response.data);
+      const response = await fetch('/api/api');
+      if (!response.ok) {
+        throw new Error('Failed to fetch data');
+      }
+      const data = await response.json();
+      setActivity(data.activity);
     } catch (error) {
-      console.error('Error fetching quotes:', error);
+      console.error(error);
     }
-  };
-
+  }
   useEffect(() => {
-    fetchQuotes(); // Fetch quotes when component mounts
+
+
+    fetchData();
   }, []);
 
   const handleRefreshClick = () => {
-    fetchQuotes(); // Fetch quotes when button is clicked
+    fetchData();
   };
 
   return (
-    
-       <div className="container-fluid">
-          <h1 className="h2 text-center my-5 text-primary fw-bold">Welcome to Random Qoutes</h1>
-          <div className="row text-center" style={{ backgroundColor: 'gray', height: '300px', width: '600px', margin: '0 auto' }}>
-             <ul className="list-group">
-              {quotes.map((quote, index) => (
-                <li className="list-group-item" style={{ color: '#1a1a34'}} 
-                key={index}>{quote.quote}</li>  
-              ))}
-             </ul>
+    <div className="container-fluid">
+      <h1 className="h2 text-center my-5 text-primary fw-bold">Financial Quotes</h1>
+      <div className="row text-center" style={{ backgroundColor: 'orange', height: 'auto', width: '900px', margin: '0 auto' }}>
+        {activity ? (
+          <div className='text-primay '>
+            <h2>Activity:</h2>
+            <h5 className='text-secondary h5'>{activity}</h5>
           </div>
-           <div className="col text-center">
-          <button type="button" className="btn btn-primary my-5" onClick={handleRefreshClick}>
-            Refresh
-          </button>
-       </div>
-       </div>
-
-    
+        ) : (
+          <p>Loading Data...</p>
+        )}
+      </div>
+      <div className="col text-center">
+        <button type="button" className="btn btn-primary my-5" onClick={handleRefreshClick}>
+          Refresh
+        </button>
+      </div>
+    </div>
   );
 }
-
-    // <div className="container-fluid">
-    //       <h1 className="h2 text-center my-5 text-primary fw-bold">Welcome to Random Qoutes</h1>
-    //       <div className="row text-center" style={{ backgroundColor: 'gray', height: '300px', width: '600px', margin: '0 auto' }}>
-             
-    //       </div>
-    //        <div className="col text-center">
-    //       <button type="button" className="btn btn-primary my-5" onClick={handleRefreshClick}>
-    //         Refresh
-    //       </button>
-    //    </div>
-    //    </div>
