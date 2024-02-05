@@ -2,7 +2,9 @@ import axios from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function fetchData2(req: NextApiRequest, res: NextApiResponse) {
-  const url = 'https://catfact.ninja/fact';
+  const url = 'https://www.boredapi.com/api/activity';
+  
+
 
   try {
     const response = await axios.get(url);

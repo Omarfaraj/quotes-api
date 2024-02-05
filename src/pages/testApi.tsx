@@ -1,41 +1,44 @@
 
+
+
 import { useEffect, useState } from 'react';
 
 export default function TestApi() {
-  const [responseData, setResponseData] = useState(null);
+  const [activity, setActivity] = useState(null);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch('/api/api');
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        const data = await response.json();
-        setResponseData(data);
-      } catch (error) {
-        console.error(error);
+  async function fetchData() {
+    try {
+      const response = await fetch('/api/api');
+      if (!response.ok) {
+        throw new Error('Failed to fetch data');
       }
+      const data = await response.json();
+      setActivity(data.activity);
+    } catch (error) {
+      console.error(error);
     }
+  }
+  useEffect(() => {
+
 
     fetchData();
   }, []);
 
   const handleRefreshClick = () => {
-      fetchData();
+    fetchData();
   };
 
   return (
     <div className="container-fluid">
-      <h1 className="h2 text-center my-5 text-primary fw-bold">Welcome to Random Quotes</h1>
-      <div className="row text-center" style={{ backgroundColor: 'gray', height: '150px', width: '900px', margin: '0 auto' }}>
-        {responseData ? (
-          <div>
-            <h2>Data received:</h2>
-            <pre>{JSON.stringify(responseData, null, 2)}</pre>
+      <h1 className="h2 text-center my-5 text-primary fw-bold">Financial Quotes</h1>
+      <div className="row text-center" style={{ backgroundColor: 'orange', height: 'auto', width: '900px', margin: '0 auto' }}>
+        {activity ? (
+          <div className='text-primay '>
+            <h2>Activity:</h2>
+            <h5 className='text-secondary h5'>{activity}</h5>
           </div>
         ) : (
-          <p>Loading...</p>
+          <p>Loading Data...</p>
         )}
       </div>
       <div className="col text-center">
@@ -46,6 +49,3 @@ export default function TestApi() {
     </div>
   );
 }
-
-
-  
